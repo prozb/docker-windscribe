@@ -67,7 +67,7 @@ i="0"
 /opt/scripts/vpn-health-check.expect
 while [[ ! $? -eq 0 ]]; do
     sleep 2
-    echo "Waiting for the VPN to connect... $i"
+    echo "[$(date -Iseconds)] Waiting for the VPN to connect... $i"
     i=$[$i+1]
     if [[ $i -eq "10" ]]; then
         exit 5
@@ -75,10 +75,10 @@ while [[ ! $? -eq 0 ]]; do
     /opt/scripts/vpn-health-check.expect
 done
 
-echo "Port forward is $VPN_PORT"
+echo "[$(date -Iseconds)] Port forward is $VPN_PORT"
 
 # Run the setup script for the environment
-/opt/scripts/app-setup.sh
+/opt/scripts/app-setup.sh &
 
 # Run the user app in the docker container
 su -w VPN_PORT -g docker_group - docker_user -c "/opt/scripts/app-startup.sh"
