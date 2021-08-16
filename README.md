@@ -45,6 +45,7 @@ docker create \
   -e WINDSCRIBE_LANBYPASS=on \
   -e WINDSCRIBE_FIREWALL=on \
   -e VPN_PORT=8080
+  -e RECONNECT_TIME=60 \
   -v /location/on/host:/config \
   --dns 8.8.8.8 \
   --cap-add NET_ADMIN \
@@ -147,3 +148,7 @@ docker build \
   --pull \
   -t wiorca/docker-windscribe:latest .
 ```
+
+
+## New feature reconnect time 
+  -e RECONNECT_TIME=60 // in seconds
